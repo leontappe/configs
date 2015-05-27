@@ -158,7 +158,7 @@ bindsym $mod+r mode "resize"
 
 bar {
 	position top
-        status_command i3status -c ~/.config/i3status/config
+        status_command ~/.config/i3status/mpd.sh
 	font pango:DejaVu Sans Mono 10
 	colors {
         	background #2d2d2d
@@ -194,6 +194,12 @@ bindsym $Mod+F6 exec xbacklight -5
 bindsym $Mod+F7 exec xbacklight +5
 
 # audio todo
+exec mpd
+exec pulseaudio -D
+bindsym $mod+F10 exec amixer -q set Master 5%+
+bindsym $mod+F9 exec amixer -q set Master 5%-
+bindsym $mod+F8 exec amixer -q set Master toggle
+exec python ~/git/twmn/examples/mpd_notifier.py
 
 # network
 exec nm-applet
@@ -209,3 +215,13 @@ exec compton -b
 
 # Shortcuts
 bindsym $mod+Mod1+l exec google-chrome https://lainchan.org/all
+bindsym Control+Shift+F5 exec scrot -s
+bindsym Control+F5 exec scrot; exec twmnc -c Screenshot taken!
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+exec twmnd
